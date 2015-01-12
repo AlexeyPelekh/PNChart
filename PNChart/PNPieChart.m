@@ -52,6 +52,9 @@
         _descriptionTextShadowOffset =  CGSizeMake(0, 1);
 		_duration = 1.0;
         
+        _showPercents = YES;
+        _descriptionLabelLowerLimit = 0.0f;
+        
 		[self loadDefault];
 	}
 	
@@ -124,15 +127,20 @@
 	_currentTotal += currentDataItem.value;
 	
     UILabel *descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 80)];
-    NSString *titleText = currentDataItem.textDescription;
-    if(!titleText){
-        titleText = [NSString stringWithFormat:@"%.0f%%",currentDataItem.value/ _total * 100];
-        descriptionLabel.text = titleText ;
-    }
-    else {
-        NSString* str = [NSString stringWithFormat:@"%.0f%%\n",currentDataItem.value/ _total * 100];
-        str = [str stringByAppendingString:titleText];
-        descriptionLabel.text = str ;
+    
+    float percentage = currentDataItem.value/ _total * 100;
+    if (percentage > _descriptionLabelLowerLimit || _descriptionLabelLowerLimit == 0)
+    {
+        NSString *titleText = currentDataItem.textDescription;
+        if(!titleText){
+            titleText = [NSString stringWithFormat:@"%.0f%%", percentage];
+            descriptionLabel.text = titleText ;
+        }
+        else {
+            NSString* str = (_showPercents) ? [NSString stringWithFormat:@"%.0f%%\n",percentage] : @"";
+            str = [str stringByAppendingString:titleText];
+            descriptionLabel.text = str ;
+        }
     }
     
     CGPoint center = CGPointMake(_outerCircleRadius + distance * sin(rad),

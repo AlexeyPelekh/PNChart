@@ -30,6 +30,13 @@
 /** Default is 1.0. */
 @property (nonatomic) NSTimeInterval duration;
 
+/** Default is YES **/
+@property (nonatomic) BOOL showPercents;
+
+/** Default is 0 **/
+@property (nonatomic) float descriptionLabelLowerLimit;
+
+
 - (void)strokeChart;
 
 @end
