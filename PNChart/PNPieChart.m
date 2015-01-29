@@ -148,15 +148,16 @@
     
     descriptionLabel.font = _descriptionTextFont;
     CGSize labelSize = [descriptionLabel.text sizeWithAttributes:@{NSFontAttributeName:descriptionLabel.font}];
-    descriptionLabel.frame = CGRectMake(
-                             descriptionLabel.frame.origin.x, descriptionLabel.frame.origin.y,
-                             descriptionLabel.frame.size.width, labelSize.height);
+    CGRect labelFrame = descriptionLabel.frame;
+    labelFrame.size.height = labelSize.height;
+    
+    descriptionLabel.frame = CGRectIntegral(labelFrame);
     descriptionLabel.numberOfLines = 0;
     descriptionLabel.textColor = _descriptionTextColor;
     descriptionLabel.shadowColor = _descriptionTextShadowColor;
     descriptionLabel.shadowOffset = _descriptionTextShadowOffset;
     descriptionLabel.textAlignment = NSTextAlignmentCenter;
-    descriptionLabel.center = center;
+    descriptionLabel.center = CGPointMake(ceilf(center.x), ceilf(center.y));
     descriptionLabel.alpha = 0;
     descriptionLabel.backgroundColor = [UIColor clearColor];
 	return descriptionLabel;
