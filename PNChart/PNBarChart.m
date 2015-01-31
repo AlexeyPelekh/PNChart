@@ -56,8 +56,10 @@
     _bars                = [NSMutableArray array];
     _xLabelSkip          = 1;
     _yLabelSum           = 4;
+    _yLabelHeight        = 11.0f;
     _labelMarginTop      = 0;
     _chartMargin         = 15.0;
+    _chartMarginLeft     = 0.0f;
     _barRadius           = 2.0;
     _showChartBorder     = NO;
     _yChartLabelWidth    = 18;
@@ -90,9 +92,9 @@
             NSString *labelText = _yLabelFormatter((float)_yValueMax * ( (_yLabelSum - index) / (float)_yLabelSum ));
             
             PNChartLabel * label = [[PNChartLabel alloc] initWithFrame:CGRectMake(0,
-                                                                                  yLabelSectionHeight * index + _chartMargin - yLabelHeight/2.0,
-                                                                                  _yChartLabelWidth,
-                                                                                  yLabelHeight)];
+                                                                                  yLabelSectionHeight * index + _chartMargin - _yLabelHeight/2.0 + 2.0f,
+                                                                                  _yChartLabelWidth + _chartMarginLeft - 2.0f,
+                                                                                  _yLabelHeight)];
             label.font = _labelFont;
             label.textColor = _labelTextColor;
             [label setTextAlignment:NSTextAlignmentRight];
@@ -132,7 +134,7 @@
     }
     
     if (_showLabel) {
-        _xLabelWidth = (self.frame.size.width - _chartMargin * 2) / [xLabels count];
+        _xLabelWidth = (self.frame.size.width - _chartMargin * 2 - _chartMarginLeft) / [xLabels count];
         int labelAddCount = 0;
         for (int index = 0; index < _xLabels.count; index++) {
             labelAddCount += 1;
@@ -148,10 +150,10 @@
                 CGFloat labelXPosition;
                 if (_rotateForXAxisText){
                     label.transform = CGAffineTransformMakeRotation(M_PI / 4);
-                    labelXPosition = (index *  _xLabelWidth + _chartMargin + _xLabelWidth /1.5);
+                    labelXPosition = (index *  _xLabelWidth + _chartMargin + _xLabelWidth /1.5 + _chartMarginLeft);
                 }
                 else{
-                    labelXPosition = (index *  _xLabelWidth + _chartMargin + _xLabelWidth /2.0 );
+                    labelXPosition = (index *  _xLabelWidth + _chartMargin + _xLabelWidth /2.0 + _chartMarginLeft);
                 }
                 label.center = CGPointMake(labelXPosition,
                                            self.frame.size.height - xLabelHeight - _chartMargin + label.frame.size.height /2.0 + _labelMarginTop);
@@ -189,9 +191,9 @@
             
             if (_barWidth) {
                 barWidth = _barWidth;
-                barXPosition = index *  _xLabelWidth + _chartMargin + _xLabelWidth /2.0 - _barWidth /2.0;
+                barXPosition = index *  _xLabelWidth + _chartMargin + _xLabelWidth /2.0 - _barWidth /2.0 + _chartMarginLeft;
             }else{
-                barXPosition = index *  _xLabelWidth + _chartMargin + _xLabelWidth * 0.25;
+                barXPosition = index *  _xLabelWidth + _chartMargin + _xLabelWidth * 0.25 + _chartMarginLeft;
                 if (_showLabel) {
                     barWidth = _xLabelWidth * 0.5;
                     

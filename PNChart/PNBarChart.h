@@ -12,7 +12,6 @@
 
 #define xLabelMargin 15
 #define yLabelMargin 15
-#define yLabelHeight 11
 #define xLabelHeight 20
 
 typedef NSString *(^PNYLabelFormatter)(CGFloat yLabelValue);
@@ -46,6 +45,7 @@ typedef NSString *(^PNYLabelFormatter)(CGFloat yLabelValue);
 @property (copy) PNYLabelFormatter yLabelFormatter;
 
 @property (nonatomic) CGFloat chartMargin;
+@property (nonatomic) CGFloat chartMarginLeft;
 
 /** Controls whether labels should be displayed. */
 @property (nonatomic) BOOL showLabel;
@@ -66,6 +66,8 @@ typedef NSString *(^PNYLabelFormatter)(CGFloat yLabelValue);
 @property (nonatomic) CGFloat barWidth;
 
 @property (nonatomic) CGFloat labelMarginTop;
+
+@property (nonatomic) CGFloat yLabelHeight;
 
 /** Background color of all bars in the chart. */
 @property (nonatomic) UIColor * barBackgroundColor;
