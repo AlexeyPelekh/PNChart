@@ -152,7 +152,9 @@
     labelFrame.size.height = labelSize.height;
     
     descriptionLabel.frame = CGRectIntegral(labelFrame);
-    descriptionLabel.numberOfLines = 0;
+    descriptionLabel.numberOfLines = 1;
+    descriptionLabel.minimumScaleFactor = 0.5f;
+    descriptionLabel.adjustsFontSizeToFitWidth = YES;
     descriptionLabel.textColor = _descriptionTextColor;
     descriptionLabel.shadowColor = _descriptionTextShadowColor;
     descriptionLabel.shadowOffset = _descriptionTextShadowOffset;
