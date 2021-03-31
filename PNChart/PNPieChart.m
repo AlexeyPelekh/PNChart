@@ -122,7 +122,7 @@
 	PNPieChartDataItem *currentDataItem = [self dataItemForIndex:index];
     CGFloat distance = _innerCircleRadius + (_outerCircleRadius - _innerCircleRadius) / 2;
     CGFloat centerPercentage = (_currentTotal + currentDataItem.value / 2 );
-    if _total != 0 {
+    if (_total != 0) {
         centerPercentage = centerPercentage / _total;
     }
     CGFloat rad = centerPercentage * 2 * M_PI;
