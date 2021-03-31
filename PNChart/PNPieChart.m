@@ -109,7 +109,7 @@
 	[self maskChart];
 	
 	currentValue = 0;
-    for (int i = 1; i < _items.count; i++) {
+    for (int i = 0; i < _items.count; i++) {
 		currentItem = [self dataItemForIndex:i];
 		UILabel *descriptionLabel =  [self descriptionLabelForItemAtIndex:i];
 		[_contentView addSubview:descriptionLabel];
@@ -121,7 +121,10 @@
 - (UILabel *)descriptionLabelForItemAtIndex:(NSUInteger)index{
 	PNPieChartDataItem *currentDataItem = [self dataItemForIndex:index];
     CGFloat distance = _innerCircleRadius + (_outerCircleRadius - _innerCircleRadius) / 2;
-    CGFloat centerPercentage = (_currentTotal + currentDataItem.value / 2 ) / _total;
+    CGFloat centerPercentage = (_currentTotal + currentDataItem.value / 2 );
+    if _total != 0 {
+        centerPercentage = centerPercentage / _total;
+    }
     CGFloat rad = centerPercentage * 2 * M_PI;
     
 	_currentTotal += currentDataItem.value;
